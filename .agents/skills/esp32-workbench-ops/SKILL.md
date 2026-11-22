@@ -9,7 +9,7 @@ Use this skill whenever modifying files via PowerShell, editing MATLAB core/plug
 
 ## 1. Mandatory PowerShell 5.1 File-Editing Rules
 1. **Single-Quoted Here-Strings Only**: Never embed C++, MATLAB, or JS inside double-quoted `"..."` PowerShell strings (`\"` and `\n` fail in PS). Always use `@' ... '@` single-quoted here-strings.
-2. **UTF-8 Without BOM**: Always write files with `[System.IO.UTF8Encoding]::new($false)` and Unix LF (`$txt -replace "`r`n","`n"`) so `arduino-cli`, `bash`, and JSON parsers never choke on BOMs.
+2. **UTF-8 Without BOM**: Always write files with `[System.Text.UTF8Encoding]::new($false)` and Unix LF (`$txt -replace "`r`n","`n"`) so `arduino-cli`, `bash`, and JSON parsers never choke on BOMs.
 3. **Interactive Console Safety**: Never place `else` on a new line after `}` when generating pasteable PowerShell snippets. Put `} else {` on the same line or use guarded `if` blocks.
 4. **Post-Write Verification**: After any `.Replace(...)`, assert `$content.Contains($expectedToken)` and throw immediately if the replacement did not match.
 

@@ -3,3 +3,4 @@
 results/*/*.json
 !results/*/.gitkeep
 firmware/build_last/
+build/

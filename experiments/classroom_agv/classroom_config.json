@@ -1,0 +1,18 @@
+{
+  "roomName": "Classroom_Test_Arena",
+  "serialBaud": 460800,
+  "boundsM": { "xMin": -4.0, "xMax": 4.0, "yMin": -4.0, "yMax": 4.0 },
+  "gridResolutionM": 0.05,
+  "startPoseM": { "x": 0.0, "y": 0.0, "thetaDeg": 0.0 },
+  "sonar": {
+    "minValidMm": 30,
+    "maxReliableMm": 2200,
+    "maxOmegaHitDegSec": 45.0,
+    "logOddsFree": -0.25,
+    "logOddsHit": 0.75
+  },
+  "safety": {
+    "defaultThrottlePct": 45,
+    "maxLinkAgeMs": 220
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "boardName": "Green AGV Rev 5.2a Classroom Calibrated",
+  "registers": {
+    "commandWordAddr": "0x50001800",
+    "telemetryBaseAddr": "0x50001804",
+    "telemetryWordCount": 4,
+    "linkRttUsAddr": "0x50001814",
+    "linkAgeMsAddr": "0x50001818",
+    "linkStatsAddr": "0x5000181C"
+  },
+  "macros": {
+    "AGV_SERIAL_BAUD": 460800,
+    "AGV_ESPNOW_CH": 6,
+    "AGV_PEER_MAC": "{0xFF,0xFF,0xFF,0xFF,0xFF,0xFF}",
+    "AGV_PIN_MOT_L_A": 13, "AGV_PIN_MOT_L_B": 12,
+    "AGV_PIN_MOT_R_A": 4,  "AGV_PIN_MOT_R_B": 2,
+    "AGV_PIN_ENC_L": 19,   "AGV_PIN_ENC_R": 18,
+    "AGV_PIN_US_TRIG": 27, "AGV_PIN_US_ECHO": 26,
+    "AGV_PIN_LINE_L": 34,  "AGV_PIN_LINE_M": 32, "AGV_PIN_LINE_R": 35,
+    "AGV_PIN_BTN_T1": 5,   "AGV_PIN_BTN_T2": 15,
+    "AGV_PIN_LED_FL": 14,  "AGV_PIN_LED_FR": 23, "AGV_PIN_LED_RR": 33, "AGV_PIN_LED_RL": 25,
+    "AGV_PWM_FREQ_HZ": 2000,
+    "AGV_PWM_RES_BITS": 10,
+    "AGV_MIN_PWM_L": 28,
+    "AGV_MIN_PWM_R": 28,
+    "AGV_MAX_SAFE_PWM": 60,
+    "AGV_TRIM_L_PCT": 100,
+    "AGV_TRIM_R_PCT": 100,
+    "AGV_SLEW_PCT_TICK": 8,
+    "AGV_WATCHDOG_MS": 250,
+    "AGV_AUTO_BRAKE_MM": 200,
+    "AGV_US_POLL_MS": 35,
+    "AGV_WHEEL_DIAM_MM": "65.0000f",
+    "AGV_WHEEL_BASE_MM": "145.0000f",
+    "AGV_EDGES_PER_REV": 40
+  },
+  "kinematics": {
+    "ultrasonicForwardOffsetMm": 95.0
+  }
+}

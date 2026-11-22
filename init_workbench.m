@@ -1,12 +1,20 @@
 function paths = init_workbench()
-%INIT_WORKBENCH Register generic core, projects, experiments, instruments & testsequences.
+%INIT_WORKBENCH Register core/instruments directories and initialize workbench state.
+
     rootDir = fileparts(mfilename('fullpath'));
     setenv('ESP32_WB_ROOT', rootDir);
-    dirs = {'core', 'instruments', 'testsequences', 'projects', 'experiments'};
+
+    dirs = {'core', 'instruments', 'experiments'};
     for k = 1:numel(dirs)
-        p = fullfile(rootDir, dirs{k});
-        if isfolder(p), addpath(genpath(p)); end
+        d = fullfile(rootDir, dirs{k});
+        if isfolder(d)
+            addpath(genpath(d));
+        end
     end
+
+    wb_config('workbench');
+    lvls = wb_log('set_level', 'all');
     paths = wb_paths();
-    wb_log('info', 'INIT', 'WORKSPACE', sprintf('Root ready: %s', paths.root));
+
+    wb_log('normal', 'INIT', 'READY', sprintf('Root=%s | Log=%s', paths.root, upper(strjoin(lvls, ','))));
 end

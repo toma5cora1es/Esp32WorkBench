@@ -1,8 +1,8 @@
 {
   "boardName": "Green AGV Rev 5.2a (Carinthia UAS)",
   "registers": {
-    "commandWordSfr": "RTC_CNTL_STORE0_REG",
-    "telemetrySfrBase": "RTC_CNTL_STORE1_REG",
+    "commandWordAddr": "0x50001800",
+    "telemetryBaseAddr": "0x50001804",
     "telemetryWordCount": 4
   },
   "macros": {
@@ -14,6 +14,8 @@
     "AGV_PIN_BTN_T1": 5,   "AGV_PIN_BTN_T2": 15, "AGV_BTN_ACT_LVL": "HIGH",
     "AGV_PIN_LED_FL": 25,  "AGV_PIN_LED_FR": 33, "AGV_PIN_LED_RR": 14, "AGV_PIN_LED_RL": 23,
     "AGV_PIN_BUZZER": 32,  "AGV_BUZZER_EN": 0,
+    "AGV_PIN_SERVO_1": 14, "AGV_PIN_SERVO_2": 15,
+    "AGV_PIN_I2C_SDA": 21, "AGV_PIN_I2C_SCL": 22,
     "AGV_PWM_FREQ_HZ": 2000, "AGV_PWM_RES_BITS": 10,
     "AGV_WHEEL_DIAM_MM": "65.0000f", "AGV_WHEEL_BASE_MM": "140.0000f", "AGV_TICKS_PER_REV": 20,
     "SIM_LINE_L_OUT": 16, "SIM_LINE_M_OUT": 32, "SIM_LINE_R_OUT": 17,
@@ -24,6 +26,12 @@
     "SIM_LED_FL_IN": 25,  "SIM_LED_FR_IN": 33, "SIM_LED_RR_IN": 14, "SIM_LED_RL_IN": 23
   },
   "pins": { "builtinLed": 2, "masterRttStrobe": 4, "vspiCs": 5 },
+  "powerTestStates": [
+    { "name": "IDLE_SAFE",   "wordHex": "10000000" },
+    { "name": "LIGHTS_ON",   "wordHex": "11030000" },
+    { "name": "DRIVE_50PCT", "wordHex": "11033232" },
+    { "name": "LINE_PID",    "wordHex": "12030000" }
+  ],
   "adc1Channels": [
     { "gpio": 36, "channel": "ADC1_CH0", "silkscreen": "VP / SVP (Pin 2)" },
     { "gpio": 39, "channel": "ADC1_CH3", "silkscreen": "VN / SVN (Pin 3)" },
@@ -39,5 +47,6 @@
     { "gpio": 15, "label": "D15 (TOUCH3)" }, { "gpio": 2,  "label": "D2  (TOUCH2)" },
     { "gpio": 4,  "label": "D4  (TOUCH0)" }
   ],
-  "kinematics": { "ultrasonicForwardOffsetMm": 95.0 }
+  "kinematics": { "ultrasonicForwardOffsetMm": 95.0 },
+  "notes": "Mainboard JP4 1-2 routes LED5(D14); JP5 1-2 routes T2(D15); JP1/JP2/JP3 1-2 route ground sensors or 2-3 extpcb. Sensorboard JP5 1-2 routes Buzzer(D32)."
 }

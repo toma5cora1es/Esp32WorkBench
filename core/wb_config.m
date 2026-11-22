@@ -1,28 +1,32 @@
-function cfg = wb_config(section, arg)
-%WB_CONFIG Config loader supporting workbench, instruments, and any board in config/boards/.
-    persistent cache
-    if isempty(cache), cache = struct(); end
-    if nargin < 1 || isempty(section), section = 'workbench'; end
+function [cfg, resolvedPath] = wb_config(section, arg)
+%WB_CONFIG Direct JSON loader (always reads fresh from disk; zero stale cache).
+
+    if nargin < 1 || isempty(section)
+        wb_log('error', 'CONFIG', 'MISSING_SECTION', 'Specify config section: workbench, instruments, or board');
+        error('WB:MissingConfigSection', 'Specify config section: workbench | instruments | board.');
+    end
+
     key = lower(strtrim(char(section)));
-    if strcmp(key, 'reload'), cache = struct(); cfg = wb_config('workbench'); return; end
 
-    if strcmp(key, 'board')
-        bName = 'green_agv_rev52a';
-        if nargin >= 2 && ~isempty(arg), bName = char(arg); end
-        cKey = ['board_' matlab.lang.makeValidName(bName)];
-        if ~isfield(cache, cKey)
-            bp = wb_paths('board', bName);
-            if ~isfile(bp), error('WB:MissingBoard', 'Board profile not found: %s', bp); end
-            cache.(cKey) = jsondecode(fileread(bp));
-        end
-        cfg = cache.(cKey); return;
-    end
+    switch key
+        case 'workbench'
+            resolvedPath = fullfile(wb_paths('config'), 'workbench_config.json');
+            cfg = jsondecode(fileread(resolvedPath));
 
-    fileMap = struct('workbench', 'workbench_config.json', 'instruments', 'instruments.json');
-    if ~isfield(fileMap, key), error('WB:BadCfg', 'Unknown config section: %s', key); end
-    if ~isfield(cache, key)
-        cp = fullfile(wb_paths('config'), fileMap.(key));
-        cache.(key) = jsondecode(fileread(cp));
+        case 'instruments'
+            resolvedPath = fullfile(wb_paths('config'), 'instruments.json');
+            cfg = jsondecode(fileread(resolvedPath));
+
+        case 'board'
+            resolvedPath = wb_paths('board', arg);
+            cfg = jsondecode(fileread(resolvedPath));
+            if ~isfield(cfg, 'boardName') || ~isfield(cfg, 'macros')
+                wb_log('error', 'CONFIG', 'BAD_BOARD', sprintf('Board JSON missing boardName/macros: %s', resolvedPath));
+                error('WB:BadBoardSchema', 'Board JSON missing required fields: %s', resolvedPath);
+            end
+
+        otherwise
+            wb_log('error', 'CONFIG', 'BAD_SECTION', sprintf('Unknown config section "%s"', key));
+            error('WB:BadConfigSection', 'Unknown config section "%s".', key);
     end
-    cfg = cache.(key);
 end

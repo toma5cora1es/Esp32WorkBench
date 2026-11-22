@@ -9,9 +9,9 @@
     "expectedIdnSubstr": "E36312A",
     "timeoutMs": 5000,
     "channels": {
-      "slaveLogic":      { "ch": 1, "nominalV": 5.00, "currentLimitA": 2.00, "pinLabel": "ESP32 5V/VIN -> GND" },
-      "motorBatteryRail":{ "ch": 2, "nominalV": 4.00, "currentLimitA": 1.00, "pinLabel": "TP-BATT+ (Switch S2=ON) -> GND" },
-      "adcStimulusDc":   { "ch": 3, "nominalV": 0.00, "currentLimitA": 0.05, "maxSafeV": 3.25, "pinLabel": "ADC1 GPIO 34 -> GND" }
+      "slaveLogic":       { "ch": 1, "nominalV": 5.00, "currentLimitA": 2.00, "safeOff": "nominal", "pinLabel": "ESP32 5V/VIN -> GND" },
+      "motorBatteryRail": { "ch": 2, "nominalV": 4.00, "currentLimitA": 1.00, "safeOff": "off",     "pinLabel": "TP-BATT+ (Switch S2=ON) -> GND" },
+      "adcStimulusDc":    { "ch": 3, "nominalV": 0.00, "currentLimitA": 0.05, "safeOff": "off",     "maxSafeV": 3.25, "pinLabel": "ADC1 GPIO 34 -> GND" }
     }
   },
   "lecroy_ws4104hd": {
@@ -19,10 +19,10 @@
     "expectedIdnSubstr": "WS4104HD",
     "timeoutMs": 5000,
     "channels": {
-      "espNowRttProbe": { "ch": "C1", "vdiv": 1.0, "label": "Master GPIO 4 RTT Strobe" },
-      "motorPwmProbe":  { "ch": "C2", "vdiv": 1.0, "label": "Slave Left Motor PWM" },
-      "ultrasonicProbe":{ "ch": "C3", "vdiv": 1.0, "label": "Slave HC-SR04 Trig/Echo" },
-      "railRippleProbe":{ "ch": "C4", "vdiv": 0.5, "label": "Slave 3V3/5V Rail Ripple" }
+      "espNowRttProbe":  { "ch": "C1", "vdiv": 1.0, "label": "Master GPIO 4 RTT Strobe" },
+      "motorPwmProbe":   { "ch": "C2", "vdiv": 1.0, "label": "Slave Left Motor PWM" },
+      "ultrasonicProbe": { "ch": "C3", "vdiv": 1.0, "label": "Slave HC-SR04 Trig/Echo" },
+      "railRippleProbe": { "ch": "C4", "vdiv": 0.5, "label": "Slave 3V3/5V Rail Ripple" }
     }
   },
   "tektronix_afg3252c": {
